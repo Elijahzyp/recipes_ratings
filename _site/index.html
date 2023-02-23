@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>More Sugar 🍬 == More Happiness ? 🧐 | recipes_ratings</title>
+<meta name="generator" content="Jekyll v3.9.3" />
+<meta property="og:title" content="More Sugar 🍬 == More Happiness ? 🧐" />
+<meta property="og:locale" content="en_US" />
+<link rel="canonical" href="http://localhost:4000/" />
+<meta property="og:url" content="http://localhost:4000/" />
+<meta property="og:site_name" content="recipes_ratings" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="More Sugar 🍬 == More Happiness ? 🧐" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebSite","headline":"More Sugar 🍬 == More Happiness ? 🧐","name":"recipes_ratings","url":"http://localhost:4000/"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <link rel="stylesheet" href="/assets/css/style.css?v=7b8c3ee4a9cbad28d841a7d8bae48b8da59cd9ed">
+    <!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <![endif]-->
+    <!-- start custom head snippets, customize with your own _includes/head-custom.html file -->
+
+<!-- Setup Google Analytics -->
+
+
+
+<!-- You can set your favicon here -->
+<!-- link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" -->
+
+<!-- end custom head snippets -->
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1><a href="http://localhost:4000/">recipes_ratings</a></h1>
+
+        
+
+        <p></p>
+
+        
+        <p class="view"><a href="https://github.com/Elijahzyp/recipes_ratings">View the Project on GitHub <small>Elijahzyp/recipes_ratings</small></a></p>
+        
+
+        
+
+        
+      </header>
+      <section>
+
+      <h1 id="more-sugar---more-happiness--">More Sugar 🍬 == More Happiness ? 🧐</h1>
+
+<h3 id="introduction">Introduction</h3>
+
+<p>​		Our original datasets came from two csv files, “recipes” and “ratings”, scraped from food.com. They include information about recipes posted on the website after 2008. In order to get the average rating per recipe, we merged these two datasets and used groupby method. Then, we assigned the average rating column back to the recipes dataset. Hence, the dataset we worked with in our project is the original recipes dataset with an additional column average rating generated from the ratings datasets.</p>
+
+<p>​	For our question, we want to explore the nutrition data of each recipe. Using this dataset, we hope to answer the following question:</p>
+
+<blockquote>
+  <p><strong>What is the relationship between the amount of sugar and the happiness of people?</strong></p>
+</blockquote>
+
+<p>​	By answering this question, we will be able to learn more about people’s feelings towards sweet food and figure out whether they will bring happiness to people. This will help people to determine if sweet food is what they should eat more often to keep them feeling happy.</p>
+
+<p>​	There is a total of 83782 rows in our dataset and some relevant columns to our question are “nutrition” which includes multiple nutritious values including the percentage of the daily value of sugar, and “avg_rating” which is the average rating for the recipe on a scale from 1 to 5.</p>
+
+<hr />
+
+<h3 id="cleaning--exploratory-data-analysis">Cleaning &amp; Exploratory Data Analysis</h3>
+
+<h5 id="data-cleaning"><strong>Data Cleaning</strong></h5>
+
+<p>​	In order to clean our data, we first expanded the nutritions column so that each value is in its own column thus making it easier for us to access the value we want, which is the amount of sugar in that recipe. We also changed the type of each of these nutritious values to float so we can use them to generate meaningful insights like taking the mean of them.</p>
+
+<p>​	Then we added a boolean column named “healthy” that tells us whether each recipe is healthy or not based on a standard we developed using the amount of protein and carbohydrate in that recipe. For the sake of this project, we consider a healthy recipe to be ones that have more protein and less carbohydrates. To quantify this, we use the average value of proteins and carbohydrates as the threshold to determine if values in a recipe are considered low or high.</p>
+
+<p>​	We also want to determine whether people are happy with each recipe. Here we assume that a high rating means that reviewers are happy from eating the dish they cooked based on this recipe. Opposite of this means that reviewers are sad from eating the dish they cooked based on this recipe. Thus, we created a new column named happiness to determine if people are happy or sad to a recipe on average.</p>
+
+<p>​	Next, we converted the “submitted”, a column that contains the date a recipe was submitted to the website, into pandas timestamp type, which allows us to extract the year out of the date and created a column named “published_year”.</p>
+
+<p>​	We also dealt with the outliers in the “minutes” column, which contains the time in minutes it takes to cook the recipe. We consider a recipe with a cooking time over 1 day to be unreasonable because they are outliers that do not give valuable information to our analysis, thus we will consider them as missing for the purpose of our project. We also consider a time of 0 minutes to be missing value since it is unlikely to have 0 minutes as the time needed for cooking a dish.</p>
+
+<h5 id="univariate-analysis">Univariate Analysis</h5>
+
+<iframe src="assets/hist_nsteps.html" width="800" height="600" frameborder="0"></iframe>
+
+<h5 id="bivariate-analysis">Bivariate Analysis</h5>
+
+<h5 id="interesting-aggregates">Interesting Aggregates</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: right">published_year</th>
+      <th style="text-align: right">False</th>
+      <th style="text-align: right">True</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: right">2008</td>
+      <td style="text-align: right">4.60127</td>
+      <td style="text-align: right">4.58912</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">2009</td>
+      <td style="text-align: right">4.62757</td>
+      <td style="text-align: right">4.60903</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">2010</td>
+      <td style="text-align: right">4.64137</td>
+      <td style="text-align: right">4.63559</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">2011</td>
+      <td style="text-align: right">4.67555</td>
+      <td style="text-align: right">4.68587</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">2012</td>
+      <td style="text-align: right">4.6695</td>
+      <td style="text-align: right">4.66992</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">2013</td>
+      <td style="text-align: right">4.64638</td>
+      <td style="text-align: right">4.69144</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">2014</td>
+      <td style="text-align: right">4.60134</td>
+      <td style="text-align: right">4.62006</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">2015</td>
+      <td style="text-align: right">4.68898</td>
+      <td style="text-align: right">4.69853</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">2016</td>
+      <td style="text-align: right">4.54036</td>
+      <td style="text-align: right">4.46237</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">2017</td>
+      <td style="text-align: right">4.47394</td>
+      <td style="text-align: right">4.47876</td>
+    </tr>
+    <tr>
+      <td style="text-align: right">2018</td>
+      <td style="text-align: right">4.59221</td>
+      <td style="text-align: right">4.65766</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h3 id="assessment-of-missingness">Assessment of Missingness</h3>
+
+<h5 id="nmar-analysis">NMAR Analysis</h5>
+
+<h5 id="missingness-dependency">Missingness Dependency</h5>
+
+<ul>
+  <li>
+    <p>Missingness on average_rating &amp; published year of recipe</p>
+  </li>
+  <li>
+    <p>Missingness on average_rating &amp; number of ingredients</p>
+  </li>
+</ul>
+
+<hr />
+
+<h3 id="hypothesis-testing">Hypothesis Testing</h3>
+
+
+
+      </section>
+      <footer>
+        
+        <p>This project is maintained by <a href="https://github.com/Elijahzyp">Elijahzyp</a></p>
+        
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="/assets/js/scale.fix.js"></script>
+  </body>
+</html>
